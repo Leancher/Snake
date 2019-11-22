@@ -38,5 +38,36 @@ namespace Snake
             nextPoint.Move(1, dir);
             return nextPoint;
         }
+
+        public void HandleKey (ConsoleKey key)
+        {
+            switch (key)
+            {
+                case ConsoleKey.LeftArrow:
+                    dir = Direction.LEFT;
+                    break;
+                case ConsoleKey.RightArrow:
+                    dir = Direction.RIGHT;
+                    break;
+                case ConsoleKey.UpArrow:
+                    dir = Direction.UP;
+                    break;
+                case ConsoleKey.DownArrow:
+                    dir = Direction.DOWN;
+                    break;
+            }
+        }
+
+        internal bool Eat(Point food)
+        {
+            Point head = GetNextPoint();
+            if (head.isHit(food))
+            {
+                food.sym = head.sym;
+                pList.Add(food);
+                return true;
+            }
+            return false;
+        }
     }
 }
