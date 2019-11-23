@@ -5,7 +5,7 @@ namespace Snake
 {
     class Program
     {
-        static void Main(string[] args)
+        static void CreateFrame()
         {
             Console.SetWindowSize(1, 1);
             Console.SetBufferSize(80, 25);
@@ -20,6 +20,11 @@ namespace Snake
             downLine.Draw();
             leftLine.Draw();
             rightLine.Draw();
+        }
+
+        static void Main(string[] args)
+        {
+            CreateFrame();
 
             Point p = new Point(4, 6, '*');
             Snake snake = new Snake(p, 4, Direction.RIGHT);
@@ -46,7 +51,10 @@ namespace Snake
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.HandleKey(key.Key);
                 }
-                
+                if (snake.GetDir() == Direction.DOWN || snake.GetDir() == Direction.UP)
+                {
+                    Thread.Sleep(100);
+                }
                 Thread.Sleep(100);
             }
         }

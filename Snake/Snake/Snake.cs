@@ -44,15 +44,31 @@ namespace Snake
             switch (key)
             {
                 case ConsoleKey.LeftArrow:
+                    if (dir == Direction.RIGHT)
+                    {
+                        break;
+                    }
                     dir = Direction.LEFT;
                     break;
                 case ConsoleKey.RightArrow:
+                    if (dir == Direction.LEFT)
+                    {
+                        break;
+                    }
                     dir = Direction.RIGHT;
                     break;
                 case ConsoleKey.UpArrow:
+                    if (dir == Direction.DOWN)
+                    {
+                        break;
+                    }
                     dir = Direction.UP;
                     break;
                 case ConsoleKey.DownArrow:
+                    if (dir == Direction.UP)
+                    {
+                        break;
+                    }
                     dir = Direction.DOWN;
                     break;
             }
@@ -68,6 +84,11 @@ namespace Snake
                 return true;
             }
             return false;
+        }
+
+        public Direction GetDir()
+        {
+            return dir;
         }
     }
 }
