@@ -77,7 +77,7 @@ namespace Snake
         internal bool Eat(Point food)
         {
             Point head = GetNextPoint();
-            if (head.isHit(food))
+            if (head.IsHit(food))
             {
                 food.sym = head.sym;
                 pList.Add(food);
@@ -86,9 +86,34 @@ namespace Snake
             return false;
         }
 
-        public Direction GetDir()
+        public Direction Dir => dir;
+
+        public bool IsHit (Walls walls)
         {
-            return dir;
+            int x = GetNextPoint().x;
+            int y = GetNextPoint().y;
+            int w = walls.GetWidth();
+            int h = walls.GetHeight();
+            if (x == 0 || x == w)
+            {
+                return true;
+            }
+            if (y == 0 || y == h)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        public bool IsHit()
+        {
+            Point head = pList.Last();
+            for (int i = 0; i < pList.Count - 2; i++)
+            {
+                if (head.IsHit(pList[i]))
+                    return true;
+            }
+            return false;
         }
     }
 }

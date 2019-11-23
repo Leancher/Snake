@@ -8,8 +8,8 @@ namespace Snake
 {
     class Walls
     {
-        int width;
-        int height;
+        private readonly int width;
+        private readonly int height;
         protected List<Figure> lineList;
         public Walls(int width, int height)
         {
@@ -19,6 +19,7 @@ namespace Snake
         }
         private void CreateLines()
         {
+            lineList = new List<Figure>();
             lineList.Add(new HorizontalLine(0, width, 0, '*'));
             lineList.Add(new HorizontalLine(0, width, height, '*'));
             lineList.Add(new VerticalLine(0, 0, height, '*'));
@@ -31,6 +32,21 @@ namespace Snake
             {
                 line.Draw();
             }
+        }
+
+        internal bool IsHit(Figure figure)
+        {
+            return false;
+        }
+
+        public int GetWidth()
+        {
+            return width;
+        }
+
+        public int GetHeight()
+        {
+            return height;
         }
     }
 }
