@@ -5,13 +5,7 @@ namespace Snake
 {
     class Program
     {
-        static void InitWindow()
-        {
-            Console.SetWindowSize(1, 1);
-            Console.SetBufferSize(80, 25);
-            Console.SetWindowSize(80, 25);
-            Console.CursorVisible = false;
-        }
+
 
         static void Main(string[] args)
         {
@@ -53,12 +47,37 @@ namespace Snake
                     ConsoleKeyInfo key = Console.ReadKey();
                     snake.HandleKey(key.Key);
                 }
-                if (snake.Dir == Direction.DOWN || snake.Dir == Direction.UP)
-                {
-                    Thread.Sleep(100);
-                }
-                Thread.Sleep(100);
+
+                Thread.Sleep(snake.GetSpeed());
             }
+            WriteGameOver();
+            Console.ReadLine();
+        }
+        static void InitWindow()
+        {
+            Console.SetWindowSize(1, 1);
+            Console.SetBufferSize(80, 25);
+            Console.SetWindowSize(80, 25);
+            Console.CursorVisible = false;
+        }
+        static void WriteGameOver()
+        {
+            int xOffset = 25;
+            int yOffset = 8;
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.SetCursorPosition(xOffset, yOffset++);
+            WriteText("===========================", xOffset, yOffset++);
+            WriteText("И Г Р А    О К О Н Ч Е Н А", xOffset, yOffset++);
+            yOffset++;
+            WriteText("      Автор: Leancher     ", xOffset, yOffset++);
+            WriteText("===========================", xOffset, yOffset++);
+        }
+
+        static void WriteText(String text, int xOffset, int yOffset)
+        {
+            Console.SetCursorPosition(xOffset, yOffset);
+            Console.WriteLine(text);
         }
     }
 }
+

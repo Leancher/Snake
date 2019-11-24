@@ -80,13 +80,12 @@ namespace Snake
             if (head.IsHit(food))
             {
                 food.sym = head.sym;
+                food.Draw();
                 pList.Add(food);
                 return true;
             }
             return false;
         }
-
-        public Direction Dir => dir;
 
         public bool IsHit (Walls walls)
         {
@@ -114,6 +113,15 @@ namespace Snake
                     return true;
             }
             return false;
+        }
+
+        public int GetSpeed()
+        {
+            if (dir == Direction.DOWN || dir == Direction.UP)
+            {
+                return 200;
+            }
+            return 100;
         }
     }
 }
